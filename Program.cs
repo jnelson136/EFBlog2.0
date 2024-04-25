@@ -67,9 +67,14 @@ try
             var blog = GetBlog(db, logger);
             if (blog != null)
             {
-                //blog.BlogId = BlogId;
-                db.AddBlog(blog);
-                logger.Info("Blog added - {name}", blog.Name);
+                // input blog
+                Blog UpdatedBlog = InputBlog(db, logger);
+                if (UpdatedBlog != null)
+                {
+                    UpdatedBlog.BlogId = blog.BlogId;
+                    db.EditBlog(UpdatedBlog);
+                    logger.Info($"Blog (id: {blog.BlogId}) updated");
+                }
             }
         }
         Console.WriteLine();
